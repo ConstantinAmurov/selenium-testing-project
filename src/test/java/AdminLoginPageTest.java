@@ -47,7 +47,20 @@ public class AdminLoginPageTest {
 
         String currentUrl = driver.getCurrentUrl();
         Assert.assertEquals(currentUrl, "https://testpages.herokuapp.com/styled/cookies/adminlogin.html");
+    }
 
+    @Test
+    public void cookiesManipulationTest() {
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, "https://testpages.herokuapp.com/styled/cookies/adminlogin.html");
+
+        adminLoginPage.setCookiesToLoggedIn();
+
+        adminLoginPage.driver.navigate().refresh();
+
+        currentUrl = driver.getCurrentUrl();
+        // it should redirect to already logged in page
+        Assert.assertEquals(currentUrl, "https://testpages.herokuapp.com/styled/cookies/adminview.html");
     }
 
     @After
