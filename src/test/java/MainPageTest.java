@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -20,8 +21,14 @@ public class MainPageTest {
     public void setup() {
         WebDriverManager.chromedriver().setup();
 
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        UsersDesiredCapability capabilities = new UsersDesiredCapability();
+
+        try {
+            driver = new ChromeDriver(capabilities.getCapabilities());
+            driver.manage().window().maximize();
+        } catch (Exception e) {
+            System.err.println("Driver Error");
+        }
     }
 
     @Test
