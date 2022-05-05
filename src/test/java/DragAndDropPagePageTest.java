@@ -12,8 +12,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import java.util.*;
 
-public class CSSPseudoClassHoverTest {
+public class DragAndDropPagePageTest {
     public WebDriver driver;
+    public DragAndDropPage dragAndDropPage;
 
     @Before
     public void setup() {
@@ -21,12 +22,23 @@ public class CSSPseudoClassHoverTest {
 
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        dragAndDropPage = new DragAndDropPage(this.driver);
+
     }
 
     @Test
     public void staticPageTest() {
-        BasicHTMLFormPage basicHTMLFormPage = new BasicHTMLFormPage(this.driver);
-        Assert.assertTrue(basicHTMLFormPage.getHeaderText().contains("CSS Pseudo Class - hover"));
+        Assert.assertTrue(dragAndDropPage.getHeaderText().contains("Drag And Drop Examples"));
+    }
+
+    @Test
+    public void dragAndDropTest() {
+        Assert.assertEquals("Drop here", dragAndDropPage.droppableElem1.getText());
+
+        dragAndDropPage.dragBothElementsIntoPlace();
+
+        Assert.assertEquals("Dropped!", dragAndDropPage.droppableElem1.getText());
+
     }
 
     @After
