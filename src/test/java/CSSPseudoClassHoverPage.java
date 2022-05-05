@@ -16,16 +16,13 @@ class CssPseudoClassHoverPage extends PageBase {
 
     private By headerBy = By.xpath("//div[@class='page-body']/h1");
     private By hoverParaBy = By.id("hoverpara");
-    private By hoverDivBy = By.id("hoverdiv");
-
+ 
     public WebElement hoverParagraf;
     
 
-    private Actions actions;
 
     public CssPseudoClassHoverPage(WebDriver driver) {
         super(driver);
-        actions = new Actions(driver);
         this.driver.get("https://testpages.herokuapp.com/styled/csspseudo/css-hover.html");
         this.onInit();
     }
@@ -39,8 +36,8 @@ class CssPseudoClassHoverPage extends PageBase {
     }
 
     public void performHoverAction() {
-        actions.moveToElement(hoverParagraf);
-        actions.click().build().perform();
+        this.actions.moveToElement(hoverParagraf);
+        this.actions.click().build().perform();
     }
 
 }
