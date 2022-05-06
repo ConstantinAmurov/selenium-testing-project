@@ -20,14 +20,15 @@ public class MainPageTest {
     @Before
     public void setup() {
         WebDriverManager.chromedriver().setup();
-
         UsersDesiredCapability capabilities = new UsersDesiredCapability();
 
         try {
             driver = new ChromeDriver(capabilities.getCapabilities());
-            driver.manage().window().maximize();
         } catch (Exception e) {
-            System.err.println("Driver Error");
+            System.err.println("Adding Capabilities Error");
+            driver = new ChromeDriver();
+        } finally {
+            driver.manage().window().maximize();
         }
     }
 
